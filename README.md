@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" alt="Kong-Debugger Logo" width="300" />
+  <img src="assets/logo.png" alt="Kong-Debugger Logo" width="500" />
 </p>
 
 <p align="center">
