@@ -1,5 +1,9 @@
 <p align="center">
-  <h1 align="center">🐵 Kong-Debugger</h1>
+  <img src="assets/logo.png" alt="Kong-Debugger Logo" width="180" />
+</p>
+
+<p align="center">
+  <h1 align="center">Kong-Debugger</h1>
   <p align="center">
     <strong>一个用 Rust 编写的轻量级 Linux 调试器</strong>
   </p>
@@ -10,10 +14,13 @@
 
 ---
 
+---
+
 Kong-Debugger（`kdb`）是一个面向 Linux 平台的命令行调试器，基于 `ptrace` 系统调用实现，提供类似 GDB 的核心调试能力。它能解析 DWARF 调试信息，支持源码级断点、变量检查和函数回溯，同时集成了 LLM 驱动的自然语言断点功能，让调试体验更加智能。
 
 **Why Rust?**
 在保证系统级性能的同时，本项目注重：
+
 + 内存安全：从根本上杜绝悬垂指针、内存泄漏、double free等问题
 + 并发安全：本项目采用**Multi-Process**编程的并发范式，相较于C语言多进程编程中较大的心智负担，rust提供了更完善和优秀的抽象
 
@@ -72,9 +79,9 @@ Set breakpoint 2 at 0x401156
 
 ### 前置要求
 
-- **Linux** 操作系统（需要 `ptrace` 系统调用支持）
-- **Rust** 工具链（edition 2018+）
-- **GCC** 编译器（用于编译目标 C 程序）
++ **Linux** 操作系统（需要 `ptrace` 系统调用支持）
++ **Rust** 工具链（edition 2018+）
++ **GCC** 编译器（用于编译目标 C 程序）
 
 ### 编译
 
@@ -233,12 +240,12 @@ graph TD
     E --> I[LLM API]
 ```
 
-- **进程控制**：通过 `ptrace` 系统调用实现进程跟踪。子进程使用 `PTRACE_TRACEME` 启用被追踪模式，调试器通过 `PTRACE_CONT`、`PTRACE_SINGLESTEP`、`PTRACE_GETREGS` 等操作控制执行流程
-- **软件断点**：向目标地址写入 `INT 3`（`0xCC`）指令，触发 `SIGTRAP` 信号。原始字节被保存用于恢复，支持断点的动态设置和移除
-- **DWARF 解析**：使用 `gimli` 和 `addr2line` 库读取 ELF 文件中的调试信息，实现地址到源码行号、函数名的映射
-- **变量读取**：通过 DWARF 位置描述（Location Description）定位变量在栈帧中的偏移，使用 `ptrace::read` 读取内存中的变量值
-- **调用栈回溯**：沿帧指针（`RBP`）链遍历栈帧，配合 DWARF 信息还原每一层函数调用的源码位置
-- **单步执行**：使用 `PTRACE_SINGLESTEP` 进行指令级单步，循环执行直到源代码行号发生变化，实现源码级的 Step Over
++ **进程控制**：通过 `ptrace` 系统调用实现进程跟踪。子进程使用 `PTRACE_TRACEME` 启用被追踪模式，调试器通过 `PTRACE_CONT`、`PTRACE_SINGLESTEP`、`PTRACE_GETREGS` 等操作控制执行流程
++ **软件断点**：向目标地址写入 `INT 3`（`0xCC`）指令，触发 `SIGTRAP` 信号。原始字节被保存用于恢复，支持断点的动态设置和移除
++ **DWARF 解析**：使用 `gimli` 和 `addr2line` 库读取 ELF 文件中的调试信息，实现地址到源码行号、函数名的映射
++ **变量读取**：通过 DWARF 位置描述（Location Description）定位变量在栈帧中的偏移，使用 `ptrace::read` 读取内存中的变量值
++ **调用栈回溯**：沿帧指针（`RBP`）链遍历栈帧，配合 DWARF 信息还原每一层函数调用的源码位置
++ **单步执行**：使用 `PTRACE_SINGLESTEP` 进行指令级单步，循环执行直到源代码行号发生变化，实现源码级的 Step Over
 
 ### 依赖项
 
@@ -269,6 +276,6 @@ graph TD
 
 ## 📋 平台要求
 
-- **操作系统**：Linux（依赖 `ptrace` 系统调用）
-- **架构**：x86-64（依赖寄存器布局如 `RIP`、`RBP`）
-- **Rust**：Edition 2018+
++ **操作系统**：Linux（依赖 `ptrace` 系统调用）
++ **架构**：x86-64（依赖寄存器布局如 `RIP`、`RBP`）
++ **Rust**：Edition 2018+
