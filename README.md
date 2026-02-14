@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <h1 align="center">Kong-Debugger</h1>
+  <!-- <h1 align="center">Kong-Debugger</h1> -->
   <p align="center">
     <strong>一个用 Rust 编写的轻量级 Linux 调试器</strong>
   </p>
