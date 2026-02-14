@@ -28,6 +28,11 @@ impl From<gimli_wrapper::Error> for Error {
 }
 
 impl DwarfData {
+    /// 返回所有解析到的源文件信息（包含函数、变量、行号等）
+    pub fn files(&self) -> &[File] {
+        &self.files
+    }
+
     pub fn from_file(path: &str) -> Result<DwarfData, Error> {
         let file = fs::File::open(path).or(Err(Error::ErrorOpeningFile))?;
         let mmap = unsafe { memmap::Mmap::map(&file).or(Err(Error::ErrorOpeningFile))? };

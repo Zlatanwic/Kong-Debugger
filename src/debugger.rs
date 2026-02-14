@@ -324,7 +324,7 @@ impl Debugger {
                 }
                 DebuggerCommand::NaturalBreak(description) => {
                     println!("正在解析自然语言断点: \"{}\" ...", description);
-                    match crate::llm::parse_natural_breakpoint(&description, &self.debug_data) {
+                    match crate::llm::parse_with_fallback(&description, &self.debug_data) {
                         Ok(spec) => {
                             let addr = match &spec {
                                 crate::llm::BreakpointSpec::Line { file, line } => {
