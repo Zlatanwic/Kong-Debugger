@@ -80,7 +80,7 @@ Set breakpoint 2 at 0x401156
 
 ```bash
 # 克隆仓库
-git clone https://github.com/your-username/kong-debugger.git
+git clone https://github.com/Zlatanwic/Kong-Debugger.git
 cd kong-debugger
 
 # 编译调试器
